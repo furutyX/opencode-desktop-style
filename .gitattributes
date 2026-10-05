@@ -1,0 +1,4 @@
+# normalize to LF in the repository (important for the node shebang on macOS/Linux)
+* text=auto eol=lf
+*.png binary
+*.ico binary
