@@ -1,0 +1,103 @@
+/* ============================================================================
+ * OpenCode Desktop – grouping frames / expand-collapse markers
+ * ----------------------------------------------------------------------------
+ * Injected into app.asar -> out/renderer/index.html as
+ * <style id="oc-desktop-overrides">.
+ *
+ * Targets:
+ *   (1) tool-run groups   [data-component="collapsed-tool-group"]
+ *   (2) assistant reply   [data-component="text-part"]
+ *   (3) expand markers    + (collapsed) / − (expanded) at the start of triggers
+ *
+ * Border colors mix currentColor so they adapt to any light/dark theme.
+ * A plain gray rgba is declared first as a fallback for no color-mix support.
+ * ========================================================================== */
+
+/* ---- (1) tool-run groups: wrap in a rounded frame --------------------- */
+[data-component="collapsed-tool-group"] {
+  border: 1px solid rgba(127, 127, 127, 0.45);
+  border-color: color-mix(in srgb, currentColor 22%, transparent);
+  border-radius: 8px;
+  background-color: rgba(127, 127, 127, 0.08);
+  background-color: color-mix(in srgb, currentColor 6%, transparent);
+  padding: 2px 8px;
+}
+
+/* keep the sticky header flush with the frame background when expanded */
+[data-component="collapsed-tool-group"]
+  > [data-component="collapsible"].tool-collapsible
+  > [data-slot="collapsible-trigger"][aria-expanded="true"] {
+  background-color: rgba(127, 127, 127, 0.08);
+  background-color: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+/* ---- (2) assistant reply text: frame with a left accent --------------- */
+[data-component="text-part"] {
+  border: 1px solid rgba(127, 127, 127, 0.45);
+  border-color: color-mix(in srgb, currentColor 22%, transparent);
+  border-left-width: 3px;
+  border-left-color: rgba(127, 127, 127, 0.7);
+  border-left-color: color-mix(in srgb, currentColor 42%, transparent);
+  border-radius: 8px;
+  background-color: rgba(127, 127, 127, 0.06);
+  background-color: color-mix(in srgb, currentColor 5%, transparent);
+  padding: 10px 14px;
+}
+
+/* ---- (3) expand-collapse markers: + when collapsed, − when expanded --- */
+[data-component="collapsed-tool-group"] [data-slot="collapsible-trigger"]::before,
+[data-component="read-tool-group"] [data-slot="collapsible-trigger"]::before,
+[data-component="tool-part-wrapper"] > [data-component="collapsible"] > [data-slot="collapsible-trigger"]::before {
+  content: "+";
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-right: 6px;
+  border: 1px solid rgba(127, 127, 127, 0.55);
+  border-color: color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 4px;
+  color: rgba(200, 200, 200, 0.9);
+  color: color-mix(in srgb, currentColor 65%, transparent);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+[data-component="collapsed-tool-group"] [data-slot="collapsible-trigger"][aria-expanded="true"]::before,
+[data-component="read-tool-group"] [data-slot="collapsible-trigger"][aria-expanded="true"]::before,
+[data-component="tool-part-wrapper"] > [data-component="collapsible"] > [data-slot="collapsible-trigger"][aria-expanded="true"]::before {
+  content: "−";
+}
+
+/* ----------------------------------------------------------------------------
+ * Variations (uncomment to taste)
+ * -------------------------------------------------------------------------- */
+
+/* (a) also frame reasoning / thinking parts */
+/*
+[data-component="reasoning-part"] {
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-color: color-mix(in srgb, currentColor 16%, transparent);
+  border-left-width: 3px;
+  border-left-color: color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 8px;
+  background-color: color-mix(in srgb, currentColor 4%, transparent);
+  padding: 10px 14px;
+}
+*/
+
+/* (b) frame the WHOLE assistant response instead of per-part text.
+ *     Delete the text-part block above and use this.
+ */
+/*
+[data-slot="session-turn-assistant-content"] {
+  border: 1px solid rgba(127, 127, 127, 0.45);
+  border-color: color-mix(in srgb, currentColor 22%, transparent);
+  border-radius: 12px;
+  background-color: color-mix(in srgb, currentColor 4%, transparent);
+  padding: 12px 14px;
+}
+*/

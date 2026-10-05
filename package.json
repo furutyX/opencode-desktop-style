@@ -1,0 +1,45 @@
+{
+  "name": "opencode-desktop-style",
+  "version": "0.1.0",
+  "description": "Unofficial CLI that adds grouping frames and expand/collapse markers to the OpenCode Desktop app (patches app.asar).",
+  "license": "MIT",
+  "author": "furutyX",
+  "type": "commonjs",
+  "bin": {
+    "opencode-desktop-style": "bin/cli.cjs"
+  },
+  "files": [
+    "bin",
+    "css",
+    "docs",
+    "opencode",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node bin/cli.cjs --help"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-desktop",
+    "electron",
+    "asar",
+    "theme",
+    "css",
+    "customization"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/furutyX/opencode-desktop-style.git"
+  },
+  "bugs": {
+    "url": "https://github.com/furutyX/opencode-desktop-style/issues"
+  },
+  "homepage": "https://github.com/furutyX/opencode-desktop-style#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
